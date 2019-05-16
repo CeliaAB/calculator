@@ -1,0 +1,43 @@
+*{
+    font-family: 'Roboto', sans-serif;
+    color: rgb(34, 20, 20);
+    background: rgb(177, 204, 177);
+}
+
+.calculator {
+    width: 500pt;
+    height: 700pt;
+    background: blueviolet;
+    margin-left: 100px;
+    border-top-left-radius: 80%20px;
+    border-top-right-radius: 80%20px;
+    border-bottom-left-radius: 80%20px;
+    border-bottom-right-radius: 80%20px;
+}
+
+.title {
+    color: rgb(39, 36, 83);
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.row {
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    margin: 10px;
+    
+}
+
+.button{
+    border-top-left-radius: 80%20px;
+    border-top-right-radius: 80%20px;
+    border-bottom-left-radius: 80%20px;
+    border-bottom-right-radius: 80%20px;
+}
