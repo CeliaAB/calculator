@@ -7,7 +7,6 @@
 .calculator {
     width: 500pt;
     height: 700pt;
-    background: blueviolet;
     margin-left: 100px;
     border-top-left-radius: 80%20px;
     border-top-right-radius: 80%20px;
@@ -35,7 +34,16 @@
     
 }
 
+.ctrl{
+    width: 60px;
+    border-top-left-radius: 80%20px;
+    border-top-right-radius: 80%20px;
+    border-bottom-left-radius: 80%20px;
+    border-bottom-right-radius: 80%20px;
+}
+
 .button{
+    width: 60px;
     border-top-left-radius: 80%20px;
     border-top-right-radius: 80%20px;
     border-bottom-left-radius: 80%20px;
