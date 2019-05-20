@@ -7,13 +7,15 @@
 }
 
 .calculator {
+    margin: auto;
     width: 350px;
     height: 520px;
     background: rgb(109, 120, 224); 
     border-radius: 20px;
     box-shadow: 15px 15px 15px gray;
-    border-right: 10px solid rgb(19, 25, 73);
-    border-bottom: 10px solid rgb(19, 25, 73);
+    border-right: 12px solid rgb(24, 32, 94);
+    border-bottom: 12px solid rgb(19, 25, 73);
+    
 }
 
 .title {

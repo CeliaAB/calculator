@@ -1,10 +1,11 @@
+//eeech I want to append NOT add
+// test if its a number, then add to operand or operator
 document.addEventListener('DOMContentLoaded', startCalculator)
 
 // set the totals to zero
-var entries = [];
 var total = 0;
-firstOperand = 0;
-secondOperand = 0;
+var firstOperand = 0;
+var secondOperand = 0;
 
 //set temp workspaces
 var temp = '';
@@ -106,19 +107,17 @@ function keyedInput () {
                         }
                         total = product;
                         display.value = total;
+                        firstOperand = product;
                         secondOperand = 0;
                         tempEntries = [];
                         poppedEntries = [];
 
                         if (getValue === "=") {
-                            firstOperand = 0;
                             operator = '';
                             temp = '';
 
                         } else {
                             //since operator is not an equal but the next operation we need to reset firstOperand
-                            
-                            firstOperand = product;
                             operator += getValue;
                             temp = product;
                             product = '';
