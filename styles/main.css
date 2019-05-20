@@ -27,6 +27,8 @@
 
 .calculator_screen {
     height: 50px;
+    text-align: right;
+    padding-right: 5px;
     margin-left: 28px;
     margin-bottom: 10px;
     background: rgb(206, 207, 218); 
@@ -39,19 +41,6 @@
 }
 
 .button{
-    height: 55px;
-    width: 60px;
-    margin: 5px;
-    border-top-left-radius: 80%20px;
-    border-top-right-radius: 80%20px;
-    border-bottom-left-radius: 80%20px;
-    border-bottom-right-radius: 80%20px;
-    font-size: 1.5em;
-    color: rgb(34, 20, 20);
-    background: rgb(177, 204, 177);
-}
-
-.ctrl {
     height: 55px;
     width: 60px;
     margin: 5px;
