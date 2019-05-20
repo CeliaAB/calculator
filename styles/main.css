@@ -6,19 +6,9 @@
     width: 100%;
 }
 
-container {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-}
-
 .calculator {
     width: 350px;
-    height: 500px;
+    height: 520px;
     background: rgb(109, 120, 224); 
     border-radius: 20px;
     box-shadow: 15px 15px 15px gray;
@@ -28,19 +18,20 @@ container {
 
 .title {
     color: rgb(39, 36, 83);
-    margin-top: 160px;
+    margin-top: 150px;
     padding-top: 20px;
     font-size: 40px;
-    font-weight: 800;
+    font-weight: 700;
     text-align: center;
 }
 
 .calculator_screen {
     height: 50px;
     margin-left: 28px;
+    margin-bottom: 10px;
     background: rgb(206, 207, 218); 
     border-radius: 10px;
-    font-size: 2rem;
+    font-size: 1.5em;
 }
 
 .row {
@@ -55,7 +46,7 @@ container {
     border-top-right-radius: 80%20px;
     border-bottom-left-radius: 80%20px;
     border-bottom-right-radius: 80%20px;
-    font-size: 2rem;
+    font-size: 1.5em;
     color: rgb(34, 20, 20);
     background: rgb(177, 204, 177);
 }
@@ -68,7 +59,7 @@ container {
     border-top-right-radius: 80%20px;
     border-bottom-left-radius: 80%20px;
     border-bottom-right-radius: 80%20px;
-    font-size: 2rem;
+    font-size: 1.5em;
     color: rgb(34, 20, 20);
     background: rgb(177, 204, 177);
 }
