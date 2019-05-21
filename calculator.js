@@ -1,16 +1,18 @@
 //eeech I want to append NOT add
-// test if its a number, then add to operand or operator
-document.addEventListener('DOMContentLoaded', startCalculator)
+document.getElementById("workings").classList.add("calculator_screen");
+document.addEventListener('DOMContentLoaded', startCalculator);
 
 // set the totals to zero
 var total = 0;
-var firstOperand = 0;
-var secondOperand = 0;
+var entries = [];
+var firstOperand = '';
+var secondOperand = '';
+var operator = '';
 
 //set temp workspaces
 var temp = '';
+var numTemp ='';
 var product = '';
-var operator = '';
 var tempEntries = [];
 var poppedEntries = [];
 
@@ -18,13 +20,7 @@ var poppedEntries = [];
 let display = document.getElementById("workings");
 
 //notes: Need to sort out if +- or -+ is clicked, in that order
-//notes: I need a place to store the product if say ** or ÷÷ is clicked maybe "err" for the second?
-//notes: I need a place to store the product if C is clicked to show what is currently solution
-//notes: I need to display product if = is clicked to show what is currently solution
 //notes: Need to change sign if +/- is clicked
-//notes: Need to make sure 2 decimals are not clicked maybe "err" for the second?
-//notes: maybe keep a copy of the display so that when C is clicked its not appended to the display string
-//need to deal with if there's a product in the display already when an operator is keyed
 
 function startCalculator () {
     document.addEventListener('click', keyedInput);
@@ -42,88 +38,131 @@ function keyedInput () {
     //"%" "*" "/" "=" are not acceptable and return "Error"
     //take into account the product from the prior answer is a valid starting point
     if (temp == null) {
-        if (checkIfNum == NaN && getValue === "%" || getValue === "*" || getValue === "/" || getValue === "=" || getValue === "C") {
+        if (checkIfNum === NaN && getValue === "%" || getValue === "*" || getValue === "/" || getValue === "=" || getValue === "C") {
         display.value = "ERROR";
         return;
+        }
+    } 
+    
+    //everytime a valid entry is hit, it is added to an operand until an operator is encounterd. "C" "=" require a different process
+    if (operator === null && checkIfNum !== NaN || getValue === ".") {
+
+        //if there is value in the product already from a previous calculation
+        //need to reset to '' if new number or "." is keyed
+        if (firstOperand !==null) {
+            temp = '';
+            firstOperand = '';
+        }
+        
+        //add input to firstOperand
+        temp += getValue;
+        numTemp += getValue;
+        display.value = temp;
+        entries.push(temp);
+        tempEntries.push(numTemp);
+        firstOperand = numTemp;
+
+    } else {
+        if (operator !== null && checkIfNum !== NaN || getValue === ".") {
+        
+            //add input to secondOperand
+            temp += getValue;
+            numTemp += getValue;
+            display.value = temp;
+            entries.push(temp);
+            tempEntries.push(numTemp);
+            secondOperand = numTemp;
+        }
+    }
+
+    //if "C" is entered, reset everything if firstOperand or get rid of the last entry for secondOperand
+    if (checkIfNum === NaN && getValue == "C") {
+        if (operator == null) {
+            window.location.reload();
         } else {
-
-            //everytime a valid entry is hit, it is added to an operand until an operator is encounterd. "C" "=" require a different process
-            if (checkIfNum !== NaN && operator == null) {
-                
-                //add input to firstOperand
-                temp += getValue;
+            if (operator !== null) {
+                temp = firstOperand += operator;
+                entries.push(temp);
                 display.value = temp;
-                tempEntries.push(temp);
+                secondOperand = '';
+            }
+        }
+    }
             
-            } else {
-                if (checkIfNum !== NaN && operator !== null) {
-                
-                    //add input to secondOperand
-                    temp += getValue;
-                    display.value = temp;
-                    tempEntries.push(temp);
-                }
+    //set operator, check for exponentiation "**"
+    if (checkIfNum === NaN && operator == null && getValue !== "=") {
+        operator += getValue;
+        temp += getValue;
+        entries.push(temp);
+        display.value = temp;
+    }
 
-                //if "C" is entered then get rid of the last entry
-                if (getValue == "C") {
-                    poppedEntries = tempEntries.pop();
-                    temp = tempEntries[tempEntries.length - 1];
-                    display.value = temp;
-                
-                } else 
-                    
-                //set firstOperand if an operator is encountered other than "="
-                if (checkIfNum === NaN && operator == null && getValue !== "=") { 
-                    firstOperand += temp;
-                    operator += getValue;
-                } else 
-                    if (checkIfNum === NaN && operator == null && getValue === "=") {
-                        display.value = "ERROR";
-                        temp = '';
-                        return;
-                    }
-                
-                //set secondOperand if an operator including "=" is encountered
-                if (checkIfNum === NaN && operator !== null) {            
-                    secondOperand+= temp;
+    if (checkIfNum === NaN && operator == "*" && getValue === "*" && secondOperand == '') {
+        operator += getValue;
+        temp += getValue;
+        entries.push(temp);
+        display.value = temp;
+    } 
+        
+    //get total if "=" or another operator is encountered. 
+    if (getValue !== "C" && getValue === "+" || getValue === "-" || getValue === "%" || getValue === "*" || getValue === "/" || getValue === "=") {
+        if (operator === "+") {
+            product = firstOperand += secondOperand;
+        } else if (operator === "-") {
+            product = firstOperand -= secondOperand;
+            }
+        else if (operator === "*") {
+            product = firstOperand *= secondOperand;
+            }
+        else if (operator === "**") {
+            product = firstOperand *= firstOperand;
+            }
+        else if (operator === "/") {
+            product = firstOperand /= secondOperand;
+            }
+        else if (operator === "%") {
+            product = firstOperand %= secondOperand;
+            }
+        
+        //display product
+        total = product;
+        display.value = total;
 
-                    //check if "=" has been entered. If it has, get total and clear fields.
-                    //If its another operator, reset the equation and use total as first Operand
-                    if (getValue !== "C" && getValue === "+" ||getValue === "-" ||getValue === "%" || getValue === "*" || getValue === "/" || getValue === "=") {
-                        if (operator === "+") {
-                            product = firstOperand += secondOperand;
-                        }
-                        else if (operator === "-") {
-                            product = firstOperand -= secondOperand;
-                        }
-                        else if (operator === "*") {
-                            product = firstOperand *= secondOperand;
-                        }
-                        else if (operator === "/") {
-                            product = firstOperand /= secondOperand;
-                        }
-                        else if (operator === "%") {
-                            product = firstOperand %= secondOperand;
-                        }
-                        total = product;
-                        display.value = total;
-                        firstOperand = product;
-                        secondOperand = 0;
-                        tempEntries = [];
-                        poppedEntries = [];
+        //reset firstOperand with product
+        firstOperand = product;
 
-                        if (getValue === "=") {
-                            operator = '';
-                            temp = '';
+        //If the new operator is not "=", reset the equation and use total as first Operand
+        if (getValue !== "=") {
 
-                        } else {
-                            //since operator is not an equal but the next operation we need to reset firstOperand
-                            operator += getValue;
-                            temp = product;
-                            product = '';
-                        }
-                    }
-                }
+            //reset operator
+            operator = getValue;
+
+            //reset temp with firstOperand and operator
+            temp = firstOperand += operator;
+
+            //clear all other fields
+            entries = [];
+            secondOperand = '';
+            numTemp ='';
+            product = '';
+            tempEntries = [];
+            poppedEntries = [];
+        
+        } else {
+            //If the new operator is "=", clear fields other than the total to be used again unless C is pressed.
+            if (getValue === "=") {
+
+            //reset temp with firstOperand
+            temp = firstOperand;
+
+            //clear all other fields
+            entries = [];
+            secondOperand = '';
+            operator = '';
+            numTemp ='';
+            product = '';
+            tempEntries = [];
+            poppedEntries = [];
             }
         }
     }
