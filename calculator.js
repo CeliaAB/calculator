@@ -45,7 +45,7 @@ function keyedInput () {
     } 
     
     //everytime a valid entry is hit, it is added to an operand until an operator is encounterd. "C" "=" require a different process
-    if (operator === null && checkIfNum !== NaN || getValue === ".") {
+    if (operator === null && checkIfNum !== NaN || operator === null && getValue === ".") {
 
         //if there is value in the product already from a previous calculation
         //need to reset to '' if new number or "." is keyed
@@ -63,7 +63,7 @@ function keyedInput () {
         firstOperand = numTemp;
 
     } else {
-        if (operator !== null && checkIfNum !== NaN || getValue === ".") {
+        if (operator !== null && checkIfNum !== NaN || operator !== null && getValue === ".") {
         
             //add input to secondOperand
             temp += getValue;
